@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prominent Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0c;
+    --bg-subtle: #141414;
+    --text: #c8c4bc;
+    --text-bright: #e8e4dc;
+    --text-dim: #6b6660;
+    --accent: #b8977e;
+    --accent-dim: #8a6d57;
+    --border: #222;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Newsreader', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--accent-dim);
+    color: var(--text-bright);
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 80px 0 0;
+  }
+
+  .header-name {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .header-sub {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Nav ── */
+  nav {
+    margin-top: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 28px;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  nav a:hover {
+    color: var(--text-bright);
+  }
+
+  /* ── Sections ── */
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+
+  /* ── Currently ── */
+  .current-block {
+    margin-bottom: 28px;
+  }
+
+  .current-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .current-block p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .current-block .tag {
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Project cards ── */
+  .project {
+    margin-bottom: 36px;
+  }
+
+  .project:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .project-name {
+    font-size: 0.92rem;
+    color: var(--text-bright);
+    font-weight: 500;
+  }
+
+  .project-context {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .project-desc {
+    font-size: 0.84rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  .project-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .project-link:hover {
+    color: var(--text-bright);
+  }
+
+  /* ── Blog ── */
+  .blog-list {
+    list-style: none;
+  }
+
+  .blog-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+
+  .blog-item:first-child {
+    padding-top: 0;
+  }
+
+  .blog-item:last-child {
+    border-bottom: none;
+  }
+
+  .blog-title {
+    font-size: 0.88rem;
+    color: var(--text-bright);
+    text-decoration: none;
+    transition: color 0.2s;
+    line-height: 1.5;
+  }
+
+  .blog-title:hover {
+    color: var(--accent);
+  }
+
+  .blog-date {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Contact ── */
+  .contact-line {
+    font-size: 0.84rem;
+    margin-bottom: 8px;
+  }
+
+  .contact-line a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-line a:hover {
+    color: var(--text-bright);
+  }
+
+  .contact-note {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 20px;
+    line-height: 1.7;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 40px 0 60px;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 520px) {
+    header { padding-top: 48px; }
+    .header-name { font-size: 1.6rem; }
+    .blog-item { flex-direction: column; gap: 4px; }
+    nav { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="header-name">Mikey</div>
+    <div class="header-sub">Prominent Systems</div>
+  </header>
+
+  <nav>
+    <a href="#work">work</a>
+    <a href="#open">open</a>
+    <a href="#writing">writing</a>
+    <a href="#contact">contact</a>
+  </nav>
+
+  <!-- ── Currently ── -->
+  <section>
+    <div class="section-label">Currently</div>
+
+    <div class="current-block">
+      <div class="tag">contractor</div>
+      <p>Building synthetic drone data generation pipelines in Unreal Engine. Headless georeferenced world rendering with PCG-based landscapes and CineCamera observers, outputting training sets with bounding box metadata. C++ render layer, Rust orchestration, Python ML inference.</p>
+    </div>
+
+    <div class="current-block">
+      <div class="tag">school</div>
+      <p>CS-2050 at Harvard. High-performance computing — MPI, CUDA, OpenMP. Competing on a Slurm cluster leaderboard. Currently working on parallel neighbor list construction for molecular dynamics simulations.</p>
+    </div>
+
+    <div class="current-block">
+      <div class="tag">nights & weekends</div>
+      <p>Genesis — a transactional mutation kernel where programs are content-addressed symbolic graphs, mutations are structural deltas, and side effects are capability-gated. SBCL as the semantic kernel, C broker for agent lifecycle management, ephemeral Rust processes per task. Designed as a foundation for AI-native software construction.</p>
+    </div>
+  </section>
+
+  <!-- ── Client Work ── -->
+  <section id="work">
+    <div class="section-label">Client work</div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">MedQuest</span>
+        <span class="project-context">medical practice platform</span>
+      </div>
+      <div class="project-desc">Three production applications for a medical practice — AI conversational booking, treatment & supplement tracker, patient-facing sites. Currently architecting a migration off PatientNow by leveraging incoming CMS-0057-F FHIR API mandates (Jan 2027 deadline) to own the full revenue cycle. Four-phase rollout across scheduling, billing, records, and patient engagement.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Cloud infrastructure</span>
+        <span class="project-context">Cymantix · SOC2</span>
+      </div>
+      <div class="project-desc">Terraform-based production infrastructure. Designed the IAM policy structure, logging pipeline, and environment isolation to get them through SOC2 compliance.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Domain-specific retrieval system</span>
+        <span class="project-context">Cymantix</span>
+      </div>
+      <div class="project-desc">Retrieval-augmented reasoning system tuned to their product domain. Custom chunking, retrieval pipeline, and reranking — not a LangChain wrapper.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">LLM domain adaptation</span>
+        <span class="project-context">NSA-funded research</span>
+      </div>
+      <div class="project-desc">Self-denoising autoencoder approach to adapting language models to specialized domains without catastrophic forgetting.</div>
+    </div>
+  </section>
+
+  <!-- ── Open Work ── -->
+  <section id="open">
+    <div class="section-label">Open work</div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Genesis</span>
+        <span class="project-context">in progress</span>
+      </div>
+      <div class="project-desc">Event-sourced development substrate. Five-field content-addressed nodes (kind, name, refs, body, hash), five primitive verbs (create, destroy, change, revert, inspect), capability model derived from seL4 and Mark Miller's E-language. The refs field is separated for transparent DAG traversal. Theoretical lineage: lambda calculus, Scott domains, Adapton's demanded computation graphs, SICP metacircular evaluator.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Byron</span>
+        <span class="project-context">LSM-tree key-value store</span>
+      </div>
+      <div class="project-desc">Implements the Monkey and Dostoevsky optimization papers for tuning bloom filter memory allocation and compaction across LSM-tree levels. Built under Stratos at Harvard.</div>
+      <a href="https://github.com/arvaer/byron" class="project-link">github.com/arvaer/byron →</a>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">FPGA soft-core CPU</span>
+      </div>
+      <div class="project-desc">Processor, assembler, and compiler frontend from the gate level up. Wanted the full mental model from silicon to language before building anything on top of it.</div>
+    </div>
+  </section>
+
+  <!-- ── Writing ── -->
+  <section id="writing">
+    <div class="section-label">Writing</div>
+
+    <ul class="blog-list">
+      <li class="blog-item">
+        <a href="#" class="blog-title">Why C for the broker: earning your abstractions</a>
+        <span class="blog-date">draft</span>
+      </li>
+      <li class="blog-item">
+        <a href="#" class="blog-title">SBCL as a semantic kernel — choosing a Lisp in 2026</a>
+        <span class="blog-date">draft</span>
+      </li>
+      <li class="blog-item">
+        <a href="#" class="blog-title">Content-addressed nodes and the five primitive verbs</a>
+        <span class="blog-date">draft</span>
+      </li>
+      <li class="blog-item">
+        <a href="#" class="blog-title">Flanking a walled garden with FHIR mandates</a>
+        <span class="blog-date">draft</span>
+      </li>
+      <li class="blog-item">
+        <a href="#" class="blog-title">Parallel neighbor lists in molecular dynamics — per-rank local rebuild vs global allreduce</a>
+        <span class="blog-date">draft</span>
+      </li>
+      <li class="blog-item">
+        <a href="#" class="blog-title">Tiled GEMM on sm_120: what the memory hierarchy is actually doing</a>
+        <span class="blog-date">draft</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+
+    <div class="contact-line"><a href="mailto:mikey@arvaer.com">mikey@arvaer.com</a></div>
+    <div class="contact-line"><a href="https://github.com/arvaer">github.com/arvaer</a></div>
+
+    <div class="contact-note">I take one client at a time. Fixed price, clear timeline. If the project goes well, optional retainer so you're never left hanging.</div>
+  </section>
+
+  <footer>
+    Prominent Systems · 2026
+  </footer>
+
+</div>
+
+</body>
+</html>
