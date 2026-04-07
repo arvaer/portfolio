@@ -1,4 +1,15 @@
 <script>
+  const dragoniteCandidates = Object.entries(
+    import.meta.glob('../*.{png,jpg,jpeg,webp,avif,svg}', {
+      eager: true,
+      import: 'default'
+    })
+  )
+    .filter(([path]) => path.toLowerCase().includes('dragonite'))
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  const dragoniteImage = dragoniteCandidates[0]?.[1] ?? null;
+
   const navItems = [
     { href: '#work', label: 'work' },
     { href: '#open', label: 'open' },
@@ -92,8 +103,20 @@
 
 <div class="container">
   <header>
-    <div class="header-name">Mikey</div>
-    <div class="header-sub">Prominent Systems</div>
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <div class="header-name">Mikey</div>
+        <div class="header-sub">Prominent Systems</div>
+      </div>
+
+      {#if dragoniteImage}
+        <figure class="hero-dragonite" aria-label="Dragonite accent image">
+          <div class="hero-dragonite-frame">
+            <img src={dragoniteImage} alt="Dragonite" />
+          </div>
+        </figure>
+      {/if}
+    </div>
   </header>
 
   <nav aria-label="Primary">
