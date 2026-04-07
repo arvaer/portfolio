@@ -110,6 +110,7 @@ nav {
   border-bottom: 1px solid var(--border);
   display: flex;
   gap: 28px;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -281,6 +282,10 @@ footer {
     padding-top: 48px;
   }
 
+  .container {
+    padding: 0 20px;
+  }
+
   .hero-shell {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -292,9 +297,9 @@ footer {
   }
 
   .hero-dragonite {
-    width: 160px;
+    width: min(160px, 48vw);
     justify-self: start;
-    margin-bottom: -48px;
+    margin-bottom: 0;
   }
 
   .blog-item {
@@ -303,6 +308,8 @@ footer {
   }
 
   nav {
+    margin-top: 24px;
     gap: 20px;
+    row-gap: 10px;
   }
 }
