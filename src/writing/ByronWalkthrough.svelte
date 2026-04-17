@@ -105,31 +105,41 @@
   </header>
 
   <section class="hook">
-    <p class="placeholder" data-slot="hook">
-      [hook — one paragraph. What byron is, why you built it, the single most surprising thing about it.
-      The headline number to hang everything on: skiplist vs vec, 136s → 28s at 10M inserts. End with
-      one sentence that tees up the rest of the page.]
+    <p data-slot="hook">
+      byron is an embedded key value store- it uses a Log Structured Merge Tree as the backing datastore and it was written completely in rust with zero unsafe code.
+      The most fascinating thing about this project is that, with extremely little effort, I was able to speed up 10 million writes from 136s to 28s
+      on commodity hardware using open source packages. That was pretty close to the theoretical limit of the hardware I was running on.
+      It was also just an exercise in which I didn't use any LLM written code.. so in a lot of ways, it feels pure to me.
     </p>
   </section>
 
   <section class="part">
     <h2>Why an LSM</h2>
-    <p class="placeholder" data-slot="why-lsm">
-      [two or three sentences. What makes LSMs the right answer for write-heavy workloads, and what
-      byron's take on that question actually is. Link out to Monkey / Dostoevsky for readers who want
-      the academic lineage.]
-    </p>
+    <div class="prose" data-slot="why-lsm">
+      <p>LSM's play a pivotal role in write heavy workloads. Part of that is due to optimization-- but it almost feels as though with LSMs, optimizations come primarily from picking verifiably correct datastructures.</p>
+      <p>In RocksDB and other production LSM backed databases, the hot path is very optimized to offer as much operational throughput as possible.</p>
+      <p>In byron, we see that we can recover a lot of this performance without optimizing every stack allocation; and instead high level architectural decisions combined with the flexibility of Rust's trait system deliver 80% of the performance with honestly 5-10% of the effort.</p>
+    </div>
   </section>
 
   <section class="part">
     <div class="part-kicker">Design · 01</div>
     <h2>SSTable on-disk layout</h2>
 
-    <p class="placeholder" data-slot="sstable-take">
-      [your take. Why the SSTable layout is the load-bearing decision. Varint + delta + restart points
-      + page hash index — frame it as one idea, not four. The idea: every byte on disk pays rent, and
-      every CPU cache miss costs more than the disk read you were trying to avoid.]
-    </p>
+    <div class="prose" data-slot="sstable-take">
+      <p>SSTables are the foundation upon which byron-- and in turn, LSMs are built. They literally are basically just flat text files with some fancy encoding schemes.
+	It's seriously just taking strings and writing them to disk. When I was first learning about LSMs and Database internals, I thought that whatever the resident datastructure was--
+	rather, what the data looked like had to be complicated. Perhaps that's because i've accidentally tried to open binaries with Neovim. Or perhaps it's cachet or perhaps I just naturally associate hardcore sounding things with complexity. Whatever it was, before I started, I was under the impression that it was going to take some serious study to grok these systems.</p>
+
+      <p>Alas, as Sussman says in SICP 'to gain power over a spirit you must name it,' and there really is no magic here. Again,  when I was researching and planning and reading the original LSM papers, I very much thought "Golly this is going to be very complex." It's not! RocksDB is completely open source, and you can go look at their sstable implementation <a href="https://github.com/facebook/rocksdb/tree/main/table">https://github.com/facebook/rocksdb/tree/main/table</a>.</p>
+
+      <p>
+	I think I (we?) gravitate towards things that are complex or seem complex. Like there's a natural inclination to want to sound smart or something...
+	In a weird way, when I decided to study Math or Physics, I'm ashamed to say I was atleast partly motivated by the simple idea that 'it is hard.'
+	I saw those cool math equations and was like yup that's tight. The first time I saw Shrodinger's equation I was like 'oh yeah i've made it.'
+        But now I look at Maxwell's equations and it's just like damn man, I totally grifted myself. </p>
+      <p>Yes, the SSTable is incredibly simple, and that fact is the bedrock for the optimizations we lay ontop of it.</p>
+    </div>
 
     <figure class="wt-figure">
       <img src={img('sstable_full.png')} alt="SSTable on-disk layout" />
@@ -171,9 +181,8 @@
     <aside class="aside">
       <div class="aside-label">what I'd change</div>
       <p class="placeholder" data-slot="sstable-change">
-        [what you'd reconsider. Candidates: the footer-in-RAM shortcut that makes reload expensive;
-        the 8-bit hash index ceiling at 256 restarts; whether delta encoding was worth the
-        engineering cost vs. block-level compression.]
+	Stratos lead the class with the idea that every layer you traverse in the memory hierarchy is orders of magnitude slower. Retrieving something from l1 vs on disk is equivalent to walking 50m vs taking a space shuttle to pluto. Big deal.
+	Honestly, due to my inexperience at the time of writing, I believe my implementation was materializing too much of the sstable in memory. I would redesign to make sure the footers-in-ram were cheaply loadable and I'd remove any sort of copy semantics that were used. I would also overlay additional zlib compression on the delta encoded sections of the sstable and really lean into the 8bit hash table and these footers so I could inrease the operational intensity of the system.
       </p>
     </aside>
   </section>
@@ -183,6 +192,10 @@
     <h2>Memtable: double-buffered vec → lock-free skiplist</h2>
 
     <p class="placeholder" data-slot="memtable-take">
+      Yeah. So if you read my initial statements-- I posited that the purest ideas often take the form of simple truths. I think that's true intellectually.
+      The simplest form of a memtable is a simple vector that you basically shove things into. Great for an initial uncomplicated start. Not so great for performance.
+
+      To recap, a memtable is a fast in-memory buffer that you can store write operations in side of before writing them to disk in the form of an sstable. It also serves as a cache-- we tend to see great 'read' performance from memtables because it is not uncommon to read values relatively soon after they have been written. This thesis holds for the sstable compaction algorithm as well-- we tend to be more comfortable paying 
       [your take. Frame the evolution honestly: you started with what looked like the obvious,
       simplest thing (two vectors, flip on flush), and it didn't scale. The skiplist isn't a clever
       flex — it's the right primitive for ordered concurrent inserts and it makes flush trivially
@@ -516,6 +529,30 @@
     font-size: 0.9rem;
     line-height: 1.8;
     margin-bottom: 20px;
+  }
+
+  .prose {
+    margin-bottom: 8px;
+  }
+
+  .prose p {
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--text-bright);
+    margin: 0 0 1.1em;
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    word-break: break-all;
   }
 
   .placeholder {
