@@ -4,7 +4,7 @@
   const img = (name) => `/writing/byron/images/${name}`;
 
   const math = {
-    compactionTake: String.raw`[your take. The standard LSM size ratio is 10×. Byron uses $\varphi \approx 1.618$. The real argument isn't aesthetics: smaller ratios mean more levels, but each compaction merges less data at once, so write amplification is smoother and worst-case write latency spikes shrink. Reads pay a small extra cost per level, but bloom filters absorb most of it.]`,
+    compactionTake: String.raw`The standard LSM size ratio is 10× the previous sstable level. Byron uses $\varphi \approx 1.618$. True afficionados will point to the Design space and assert something about smaller ratios having lower write amplification etc. Honestly, I chose the golden ratio because it occurs in nature. It honestly performs really well too!`,
     compactionDetail: String.raw`When level $L_i$ grows to $\varphi \times |L_{i-1}|$, we compact a small number of tables from $L_i$ into $L_{i+1}$. With $\varphi \lt 2$, there are $O(\log N)$ levels, so inserts remain $O(\log N)$ overall. Merges use a min-heap streaming join across SSTable iterators.`,
     varintBytes: String.raw`Encoding nonnegative integer $N$ as a varint uses $S(N) = \lceil \log_2(N+1) / 7 \rceil$ bytes.`,
     varintExpectation: String.raw`By the tail-sum formula, $$\mathbb{E}[S] = \sum_{k=1}^{\infty} \Pr[S \ge k] = \sum_{k=1}^{\infty} \Pr[N \ge 2^{7(k-1)}].$$`,
@@ -106,19 +106,24 @@
 
   <section class="hook">
     <p data-slot="hook">
-      byron is an embedded key value store- it uses a Log Structured Merge Tree as the backing datastore and it was written completely in rust with zero unsafe code.
-      The most fascinating thing about this project is that, with extremely little effort, I was able to speed up 10 million writes from 136s to 28s
-      on commodity hardware using open source packages. That was pretty close to the theoretical limit of the hardware I was running on.
-      It was also just an exercise in which I didn't use any LLM written code.. so in a lot of ways, it feels pure to me.
+      byron is an embedded key value store- it uses a Log Structured Merge Tree as the backing datastore and it was written completely in rust with zero unsafe blocks in the crate itself.
+      Naturally, it depends on transitively unsafe code in other packages but that's beside the point. 
+      The most fascinating thing about this project is that I was able to speed up the time it took for 10 million writes from 136s to 28s
+      on commodity hardware using open source packages and, dare I say, making good design choices. It was also fun to work on-- imperfection was (and is!) acceptable, the code is uncomplicated, motivations pure :)
     </p>
   </section>
 
   <section class="part">
     <h2>Why an LSM</h2>
     <div class="prose" data-slot="why-lsm">
-      <p>LSM's play a pivotal role in write heavy workloads. Part of that is due to optimization-- but it almost feels as though with LSMs, optimizations come primarily from picking verifiably correct datastructures.</p>
-      <p>In RocksDB and other production LSM backed databases, the hot path is very optimized to offer as much operational throughput as possible.</p>
-      <p>In byron, we see that we can recover a lot of this performance without optimizing every stack allocation; and instead high level architectural decisions combined with the flexibility of Rust's trait system deliver 80% of the performance with honestly 5-10% of the effort.</p>
+      <p>
+	I suppose the correct answer is 'LSM's play a pivotal role in write heavy workloads.' But this project was never about that. In fact, by the end of this, I hope to convice anyone who's reading that there's nothing special about LSM's. Also, 'Log Structred Merge Trees?' I mean, that doesn't even sound cool.
+	To be totally honest, this was a class assignment. The thing is, I left with so much more than just another fancy hashmap inside of a github repository.
+	To me, byron was a journey, and I hope to share that with you.
+      </p>
+      <p>There are many famous key value stores from dynamodb to mongodb to rocksdb... And one would assume that these databases are incredibly complex and highly optimized and gee unless you have a PHD you may as well give up trying to write your own.
+      And i'm here to tell you that you can indeed create a sick piece of software that is highly performant and can scale workloads well. The jury's still out on RAFT though I still owe myself a distributed impl of byron but I digress.</p>
+      <p>In byron, we see that we can recover a lot of this performance without optimizing every stack allocation; and instead high level architectural decisions combined with the flexibility of Rust's trait system are amazing tools.</p>
     </div>
   </section>
 
@@ -131,14 +136,16 @@
 	It's seriously just taking strings and writing them to disk. When I was first learning about LSMs and Database internals, I thought that whatever the resident datastructure was--
 	rather, what the data looked like had to be complicated. Perhaps that's because i've accidentally tried to open binaries with Neovim. Or perhaps it's cachet or perhaps I just naturally associate hardcore sounding things with complexity. Whatever it was, before I started, I was under the impression that it was going to take some serious study to grok these systems.</p>
 
-      <p>Alas, as Sussman says in SICP 'to gain power over a spirit you must name it,' and there really is no magic here. Again,  when I was researching and planning and reading the original LSM papers, I very much thought "Golly this is going to be very complex." It's not! RocksDB is completely open source, and you can go look at their sstable implementation <a href="https://github.com/facebook/rocksdb/tree/main/table">https://github.com/facebook/rocksdb/tree/main/table</a>.</p>
+      <p>Alas, as Sussman says in SICP 'to gain power over a spirit you must name it,' and there really is no magic here. Again,  when I was researching and planning and reading the original LSM papers, I very much thought "Golly this is going to be very complex." It's not! RocksDB is completely open source, and you can go look at their sstable implementation <a href="https://github.com/facebook/rocksdb/tree/main/table">https://github.com/facebook/rocksdb/tree/main/table</a> It's shockingly easy to read and work through. And if you do, I'm sure you'll arrive at a similar conclusion.</p>
 
       <p>
-	I think I (we?) gravitate towards things that are complex or seem complex. Like there's a natural inclination to want to sound smart or something...
-	In a weird way, when I decided to study Math or Physics, I'm ashamed to say I was atleast partly motivated by the simple idea that 'it is hard.'
-	I saw those cool math equations and was like yup that's tight. The first time I saw Shrodinger's equation I was like 'oh yeah i've made it.'
-        But now I look at Maxwell's equations and it's just like damn man, I totally grifted myself. </p>
-      <p>Yes, the SSTable is incredibly simple, and that fact is the bedrock for the optimizations we lay ontop of it.</p>
+	As a side note, I think I (we?) gravitate towards things that are complex or... atleast seem complex. I think it's because our lizard brains assume the complex thing is more novel or something.
+	There's a whole boatload of scientist that said simplicity is the ultimate sophistication though. But perhaps they never saw shrodingers equations? Who's to say...
+
+	Perhaps we should substitute the word 'pure' in for simple; consider Maxwell's equations, or the Metacircular Evaluator in SICP. The idea's themselves are indeed quite sophisticated... and perhaps what's special is that there's very little ceremony about them. So it's not that they're simple... It's almost like, through the compression of idea space, we as human's are able to project part of ourselves onto the empty space the ideas purposefully leave in their canvas.
+	Perhaps this isn't making any sense... perhaps it is. Either way, I think that's why people find artistic value in these equations. And in terms of novelty-- I think pure ideas are so beautiful because they allow you to arrive in all sorts of places through some simple contemplation.
+      </p>
+      <p>So... yes, the SSTable is incredibly simple, and that fact is the bedrock for the optimizations we lay ontop of it.</p>
     </div>
 
     <figure class="wt-figure">
@@ -181,8 +188,10 @@
     <aside class="aside">
       <div class="aside-label">what I'd change</div>
       <p class="placeholder" data-slot="sstable-change">
-	Stratos lead the class with the idea that every layer you traverse in the memory hierarchy is orders of magnitude slower. Retrieving something from l1 vs on disk is equivalent to walking 50m vs taking a space shuttle to pluto. Big deal.
+	Stratos began the semester with the idea that every layer you traverse in the memory hierarchy is orders of magnitude slower. Retrieving something from l1 vs on disk is equivalent to walking 50m vs taking a space shuttle to pluto. Big deal.
 	Honestly, due to my inexperience at the time of writing, I believe my implementation was materializing too much of the sstable in memory. I would redesign to make sure the footers-in-ram were cheaply loadable and I'd remove any sort of copy semantics that were used. I would also overlay additional zlib compression on the delta encoded sections of the sstable and really lean into the 8bit hash table and these footers so I could inrease the operational intensity of the system.
+	Another great mistake I made was starting-- what I thought, was simply. The first version of the system was a grpc server around an in memory hash map just doing reads and writes.
+	It would have been more educative if I earned those abstractions instead. I wish I had started with I/O first and really nailing that, and building upwards. Bottom up, you may say, instead of top down.
       </p>
     </aside>
   </section>
@@ -192,14 +201,20 @@
     <h2>Memtable: double-buffered vec → lock-free skiplist</h2>
 
     <p class="placeholder" data-slot="memtable-take">
-      Yeah. So if you read my initial statements-- I posited that the purest ideas often take the form of simple truths. I think that's true intellectually.
-      The simplest form of a memtable is a simple vector that you basically shove things into. Great for an initial uncomplicated start. Not so great for performance.
+      The simplest form of a memtable is a vector that you shove things into. Great for an initial uncomplicated start. Not so great for performance.
 
-      To recap, a memtable is a fast in-memory buffer that you can store write operations in side of before writing them to disk in the form of an sstable. It also serves as a cache-- we tend to see great 'read' performance from memtables because it is not uncommon to read values relatively soon after they have been written. This thesis holds for the sstable compaction algorithm as well-- we tend to be more comfortable paying 
-      [your take. Frame the evolution honestly: you started with what looked like the obvious,
-      simplest thing (two vectors, flip on flush), and it didn't scale. The skiplist isn't a clever
-      flex — it's the right primitive for ordered concurrent inserts and it makes flush trivially
-      streamable. The lesson is about when to stop rolling your own and reach for crossbeam.]
+      To recap, a memtable is a fast in-memory buffer that you can store write operations in side of before writing them to disk in the form of an sstable. It also serves as a cache-- we tend to see great 'read' performance from memtables because it is not uncommon to read values relatively soon after they have been written. This thesis holds for SSTables as well-- we tend to be more comfortable paying more to retrieve values that are 'older' in terms of how long ago they were stored.
+
+      When the vector fills up, whatever's inside of it gets turned into an sstable. SSTables are sorted string tables... so that takes time cuz you have to sort them.
+      A natural next step for me was to just keep a second buffer around so I could flip them. Something like a primary and secondary-- when primary is closed to full i can swing the pointers and flush to disk.  
+
+      This is a technique that they use in video game programming with swap chains. When rendering, one frame is getting painted and the other frame is being streamed into a backing buffer and they swap. I thought I was onto something by cannibalizing my internal representation of double buffering. 
+
+      Yeah. That really didn't scale very well. There was a lot of memory contention between different threads trying to write to the same buffer, and synchronization was very expensive under load.
+      And then I discovered the skip list. If you were following my simplicity tangent from earlier-- this is one of those moments where choosing the right tool, for the perfect job, results in a simpler implementation. Instead of jamming a bunch of overhead to get my vector backed memtable to work and be performant, using crossbeam's skiplist-- a battle tested datastructure, pretty much allowed me to remove a significant amount of code and get writes to be screaming fast. It's exactly the right primitive for concurrent inserts and it's already sorted so it makes flushing streamable.
+
+      So, the lesson I took away: earn the abstraction. Earn the data structure-- it's true that when you pick the right datastrucutre, the algorithm that gets used naturally optimizes itself. This is one of those cases.
+      
     </p>
 
     <div class="figure-pair">
