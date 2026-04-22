@@ -20,19 +20,25 @@
   const currentItems = [
     {
       tag: 'contractor',
-      text: "ControlNet, Stable Diffusion, FramePack - you name it, I'm probably using it. Forward modeling in Unreal Engine, orchestrating things in a way I probably shouldn't. Got render times down 180x - 15 min to 5s at 4k on a 5090."
+      text: 'Synthetic drone data generation in Unreal Engine. Got render times from 15 min to 5s at 4K on a 5090 — 180× speedup. Diffusion-based forward modeling across ControlNet, Stable Diffusion, and FramePack.'
     },
     {
       tag: 'research student',
-      text: 'FPGA+GPU acceleration for LLM inference - heterogeneous compute for latency-critical workloads. Portable neighbor list kernels for molecular dynamics on million+ particle systems, benchmarked across OpenMP, OpenMPI, pthreads, Kokkos, and CUDA on SLURM clusters. FPGA offload of compaction and bloom filter operations in LSM trees. 5,000+ GROMACS runs for reproducible baselines. Validated against LAMMPS and JAX-MD.'
+      text: 'FPGA+GPU acceleration for LLM inference - heterogeneous compute for latency-critical workloads. Portable neighbor list kernels for molecular dynamics on million+ particle systems, benchmarked on an HPC cluster with 250 nodes. FPGA offload of compaction and bloom filter operations in LSM trees. 5,000+ GROMACS runs for reproducible baselines.'
     },
     {
       tag: 'nights & weekends',
-      text: 'Genesis - a transactional mutation kernel where programs are content-addressed symbolic graphs, mutations are structural deltas, and side effects are capability-gated. SBCL as the semantic kernel, C broker for agent lifecycle management, ephemeral Rust processes per task.'
+      text: 'Genesis — a transactional mutation kernel where programs are content-addressed symbolic graphs, mutations are structural deltas, and side effects are capability-gated. SBCL semantic kernel, C broker for agent lifecycle. Capability model borrowed from seL4.'
     }
   ];
 
   const clientWork = [
+    {
+      name: 'gopidegon.dev',
+      context: 'contractor · staff eng',
+      description:
+        'A microSaaS for fan-in form collection. Common Lisp backend.'
+    },
     {
       name: 'Healthtech platform',
       context: 'contractor · staff eng',
@@ -56,7 +62,17 @@
       context: 'NSA-funded research',
       description:
         'Self-denoising autoencoder approach to adapting language models to specialized domains without catastrophic forgetting.'
-    }
+    },
+    {
+      name: 'FPGA soft-core CPU',
+      description:
+        'Soft-core CPU on FPGA from scratch with a custom ISA. Full assembler and compiler toolchain. Eventually got DOOM running on it.'
+    },
+    {
+      name: 'Coreboot ThinkPad firmware',
+      description:
+        'Opened the machines, wrote custom RP2040 firmware for the SPI reader, reverse-engineered portions of the proprietary blob with public docs, got a clean Coreboot payload running.'
+    },
   ];
 
   const openWork = [
@@ -76,16 +92,6 @@
         label: 'github.com/arvaer/byron ->'
       }
     },
-    {
-      name: 'Coreboot ThinkPad firmware',
-      description:
-        'Opened the machines, wrote custom RP2040 firmware for the SPI reader, reverse-engineered portions of the proprietary blob with public docs, got a clean Coreboot payload running.'
-    },
-    {
-      name: 'FPGA soft-core CPU',
-      description:
-        'Soft-core CPU on FPGA from scratch with a custom ISA. Full assembler and compiler toolchain targeting it.'
-    }
   ];
 
   const writing = [
@@ -214,8 +220,7 @@
     <div class="contact-line"><a href="https://github.com/arvaer">github.com/arvaer</a></div>
 
     <div class="contact-note">
-      I take one client at a time. Fixed price, clear timeline. If the project goes well,
-      optional retainer so you're never left hanging.
+      I take one client at a time. Fixed price, clear timeline. Optional retainer after delivery.
     </div>
   </section>
 
