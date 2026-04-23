@@ -34,8 +34,8 @@
 
   const clientWork = [
     {
-      name: 'gopidegon.dev',
-      context: 'contractor · staff eng',
+      name: 'gopigeon.dev',
+      context: 'solo dev',
       description:
         'A microSaaS for fan-in form collection. Common Lisp backend.'
     },
