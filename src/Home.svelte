@@ -96,6 +96,11 @@
 
   const writing = [
     {
+      title: 'ghostly-runs — neighbor-list construction across five parallelization regimes',
+      status: 'walkthrough',
+      href: '#/writing/ghostly'
+    },
+    {
       title: 'Byron — an LSM-tree key-value store',
       status: 'walkthrough',
       href: '#/writing/byron'
