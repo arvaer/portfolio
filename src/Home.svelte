@@ -101,6 +101,11 @@
       href: '#/writing/ghostly'
     },
     {
+      title: 'RV32IM, from gates up — soft-core CPU, assembler, and emulator',
+      status: 'walkthrough',
+      href: '#/writing/softcore'
+    },
+    {
       title: 'Byron — an LSM-tree key-value store',
       status: 'walkthrough',
       href: '#/writing/byron'
@@ -112,11 +117,6 @@
     },
     {
       title: 'Genesis — content-addressed mutation kernel',
-      status: 'scheduled',
-      href: null
-    },
-    {
-      title: 'FPGA soft-core CPU — from gates to a compiler frontend',
       status: 'scheduled',
       href: null
     }

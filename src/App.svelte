@@ -2,6 +2,7 @@
   import Home from './Home.svelte';
   import ByronWalkthrough from './writing/ByronWalkthrough.svelte';
   import GhostlyRunsWalkthrough from './writing/GhostlyRunsWalkthrough.svelte';
+  import SoftCoreWalkthrough from './writing/SoftCoreWalkthrough.svelte';
 
   function currentRoute() {
     const hash = window.location.hash.replace(/^#/, '');
@@ -27,6 +28,8 @@
   <ByronWalkthrough />
 {:else if route.startsWith('/writing/ghostly')}
   <GhostlyRunsWalkthrough />
+{:else if route.startsWith('/writing/softcore')}
+  <SoftCoreWalkthrough />
 {:else}
   <Home />
 {/if}
