@@ -202,10 +202,6 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
       Optimizing and benchmarking <em>ghostly-neighbors</em> for neighbor-list construction.
     </div>
     <div class="wt-meta">
-      <a href="/papers/ghostly-runs.pdf">full pdf ↗</a>
-      <span>·</span>
-      <a href="/papers/ghostly-runs-summary.pdf">summary pdf ↗</a>
-      <span>·</span>
       <span>CS2050 · Harvard · Spring 2026</span>
     </div>
   </header>
@@ -629,10 +625,6 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
   </section>
 
   <footer class="wt-footer">
-    <a href="/papers/ghostly-runs.pdf">full annotated pdf ↗</a>
-    <span>·</span>
-    <a href="/papers/ghostly-runs-summary.pdf">summary pdf ↗</a>
-    <span>·</span>
     <a href="#/">← back to writing</a>
   </footer>
 </div>
@@ -713,18 +705,8 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
     letter-spacing: 0.02em;
   }
 
-  .wt-meta a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .wt-meta a:hover {
-    color: var(--text-bright);
-  }
-
   .wt-meta span {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 
   .hook {
@@ -1176,10 +1158,6 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
 
   .wt-footer a:hover {
     color: var(--text-bright);
-  }
-
-  .wt-footer span {
-    opacity: 0.5;
   }
 
   @media (max-width: 620px) {
