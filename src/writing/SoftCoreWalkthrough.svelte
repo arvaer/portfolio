@@ -385,9 +385,9 @@ end;`,
 
 <div class="walkthrough" bind:this={codeRoot}>
   <nav class="top-nav">
-    <a href="#/">← back</a>
+    <a href="/">← back</a>
     <span class="top-nav-sep">/</span>
-    <a href="#/">writing</a>
+    <a href="/">writing</a>
     <span class="top-nav-sep">/</span>
     <span class="top-nav-current">soft-core</span>
   </nav>
@@ -715,7 +715,7 @@ $ emu output.mif                         # software check; -d for single-step
   </section>
 
   <footer class="wt-footer">
-    <a href="#/">← back to writing</a>
+    <a href="/">← back to writing</a>
   </footer>
 </div>
 

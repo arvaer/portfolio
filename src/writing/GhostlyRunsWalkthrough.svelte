@@ -188,9 +188,9 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
 
 <div class="walkthrough" bind:this={codeRoot}>
   <nav class="top-nav">
-    <a href="#/">← back</a>
+    <a href="/">← back</a>
     <span class="top-nav-sep">/</span>
-    <a href="#/">writing</a>
+    <a href="/">writing</a>
     <span class="top-nav-sep">/</span>
     <span class="top-nav-current">ghostly-runs</span>
   </nav>
@@ -625,7 +625,7 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
   </section>
 
   <footer class="wt-footer">
-    <a href="#/">← back to writing</a>
+    <a href="/">← back to writing</a>
   </footer>
 </div>
 

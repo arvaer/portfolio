@@ -5,30 +5,55 @@
   import SoftCoreWalkthrough from './writing/SoftCoreWalkthrough.svelte';
 
   function currentRoute() {
-    const hash = window.location.hash.replace(/^#/, '');
-    return hash.startsWith('/writing/') ? hash : '/';
+    if (typeof window === 'undefined') return '/';
+    const path = window.location.pathname.replace(/\/+$/, '') || '/';
+    if (path.startsWith('/writing/byron')) return '/writing/byron';
+    if (path.startsWith('/writing/ghostly')) return '/writing/ghostly';
+    if (path.startsWith('/writing/softcore')) return '/writing/softcore';
+    return '/';
   }
 
   let route = $state(currentRoute());
 
   $effect(() => {
-    const onHashChange = () => {
+    const onNav = () => {
       const next = currentRoute();
-      if ((route === '/') !== (next === '/')) {
+      if (route !== next) {
         window.scrollTo(0, 0);
+        route = next;
       }
-      route = next;
     };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    const onClick = (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('#') || a.target === '_blank' || a.hasAttribute('download')) return;
+      const url = new URL(a.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname.endsWith('.pdf')) return;
+      e.preventDefault();
+      if (url.pathname !== window.location.pathname) {
+        window.history.pushState({}, '', url.pathname + url.hash);
+        onNav();
+      } else if (url.hash) {
+        window.location.hash = url.hash;
+      }
+    };
+    window.addEventListener('popstate', onNav);
+    document.addEventListener('click', onClick);
+    return () => {
+      window.removeEventListener('popstate', onNav);
+      document.removeEventListener('click', onClick);
+    };
   });
 </script>
 
-{#if route.startsWith('/writing/byron')}
+{#if route === '/writing/byron'}
   <ByronWalkthrough />
-{:else if route.startsWith('/writing/ghostly')}
+{:else if route === '/writing/ghostly'}
   <GhostlyRunsWalkthrough />
-{:else if route.startsWith('/writing/softcore')}
+{:else if route === '/writing/softcore'}
   <SoftCoreWalkthrough />
 {:else}
   <Home />

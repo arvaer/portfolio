@@ -98,17 +98,17 @@
     {
       title: 'ghostly-runs — neighbor-list construction across five parallelization regimes',
       status: 'walkthrough',
-      href: '#/writing/ghostly'
+      href: '/writing/ghostly'
     },
     {
       title: 'RV32IM, from gates up — soft-core CPU, assembler, and emulator',
       status: 'walkthrough',
-      href: '#/writing/softcore'
+      href: '/writing/softcore'
     },
     {
       title: 'Byron — an LSM-tree key-value store',
       status: 'walkthrough',
-      href: '#/writing/byron'
+      href: '/writing/byron'
     },
     {
       title: 'LSM design notes',

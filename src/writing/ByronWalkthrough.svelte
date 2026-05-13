@@ -84,9 +84,9 @@
 
 <div class="walkthrough" bind:this={mathRoot}>
   <nav class="top-nav">
-    <a href="#/">← back</a>
+    <a href="/">← back</a>
     <span class="top-nav-sep">/</span>
-    <a href="#/">writing</a>
+    <a href="/">writing</a>
     <span class="top-nav-sep">/</span>
     <span class="top-nav-current">byron</span>
   </nav>
@@ -505,7 +505,7 @@
     <span>·</span>
     <a href="https://github.com/arvaer/byron">github.com/arvaer/byron ↗</a>
     <span>·</span>
-    <a href="#/">← back to writing</a>
+    <a href="/">← back to writing</a>
   </footer>
 </div>
 
