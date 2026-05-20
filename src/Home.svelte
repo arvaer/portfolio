@@ -23,12 +23,8 @@
       text: 'Synthetic drone data generation in Unreal Engine. Got render times from 15 min to 5s at 4K on a 5090 — 180× speedup. Diffusion-based forward modeling across ControlNet, Stable Diffusion, and FramePack.'
     },
     {
-      tag: 'research student',
-      text: 'FPGA+GPU acceleration for LLM inference - heterogeneous compute for latency-critical workloads. Portable neighbor list kernels for molecular dynamics on million+ particle systems, benchmarked on an HPC cluster with 250 nodes. FPGA offload of compaction and bloom filter operations in LSM trees. 5,000+ GROMACS runs for reproducible baselines.'
-    },
-    {
-      tag: 'nights & weekends',
-      text: 'Genesis — a transactional mutation kernel where programs are content-addressed symbolic graphs, mutations are structural deltas, and side effects are capability-gated. SBCL semantic kernel, C broker for agent lifecycle. Capability model borrowed from seL4.'
+      tag: 'research',
+      text: 'FPGA+GPU acceleration for LLM inference - heterogeneous compute for latency-critical workloads. Portable neighbor list kernels for molecular dynamics. '
     }
   ];
 
@@ -37,7 +33,7 @@
       name: 'gopigeon.dev',
       context: 'solo dev',
       description:
-        'A microSaaS for fan-in form collection. Common Lisp backend.'
+      'A microSaaS to enable LLMs with durable queues and fan-out form filling. Common Lisp backend, Svelte Front end, self managed kubernetes cluster on my own physical hardware.'
     },
     {
       name: 'Healthtech platform',
