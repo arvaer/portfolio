@@ -279,7 +279,7 @@
     <div class="contact-line"><a href="https://github.com/arvaer">github.com/arvaer</a></div>
 
     <div class="contact-note">
-      Please reach out if you're interested in hiring me. I don't take many clients, and always have an optional retainment fee if the project goes well. 
+      Please feel free to send me an email if you would like to connect over some topic! 
     </div>
 
     {#if formStatus === 'sent'}
