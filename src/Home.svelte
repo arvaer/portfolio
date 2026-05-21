@@ -19,8 +19,8 @@
 
   const currentItems = [
     {
-      tag: 'contractor',
-      text: 'Synthetic drone data generation in Unreal Engine. Got render times from 15 min to 5s at 4K on a 5090 — 180× speedup. Diffusion-based forward modeling across ControlNet, Stable Diffusion, and FramePack.'
+      tag: 'contractor at IPS (Intel Payload Systems)',
+      text: 'Synthetic drone data generation in Unreal Engine. Making Diffusion-based forward modeling across ControlNet, Stable Diffusion, and FramePack very fast and realistic!'
     },
     {
       tag: 'research',
@@ -165,7 +165,7 @@
       href: '/writing/byron/'
     },
     {
-      title: 'LSM design notes',
+      title: 'Heterogeneous computing in Log-Structured Merge Trees',
       status: 'pdf',
       href: '/papers/lsm.pdf'
     },
@@ -279,7 +279,7 @@
     <div class="contact-line"><a href="https://github.com/arvaer">github.com/arvaer</a></div>
 
     <div class="contact-note">
-      I take one client at a time. Fixed price, clear timeline. Optional retainer after delivery.
+      Please reach out if you're interested in hiring me. I don't take many clients, and always have an optional retainment fee if the project goes well. 
     </div>
 
     {#if formStatus === 'sent'}
