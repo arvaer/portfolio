@@ -271,6 +271,99 @@ section:last-of-type {
   line-height: 1.7;
 }
 
+.contact-form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-row label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.form-row input,
+.form-row textarea {
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  color: var(--text-bright);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--accent-dim);
+}
+
+.form-row input::placeholder,
+.form-row textarea::placeholder {
+  color: var(--text-dim);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.form-actions button {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  padding: 8px 16px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.form-actions button:hover:not(:disabled) {
+  color: var(--text-bright);
+  border-color: var(--accent);
+  background: rgba(184, 151, 126, 0.06);
+}
+
+.form-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-msg {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.form-msg-ok {
+  color: var(--accent);
+}
+
+.form-msg-err {
+  color: var(--text-dim);
+}
+
 footer {
   padding: 40px 0 60px;
   font-size: 0.7rem;
