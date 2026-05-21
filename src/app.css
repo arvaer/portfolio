@@ -364,6 +364,37 @@ section:last-of-type {
   color: var(--text-dim);
 }
 
+.contact-form-sent {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.form-reset {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.form-reset:hover {
+  color: var(--text-bright);
+}
+
+.form-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 footer {
   padding: 40px 0 60px;
   font-size: 0.7rem;

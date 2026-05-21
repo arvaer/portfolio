@@ -95,15 +95,31 @@
   let formName = '';
   let formEmail = '';
   let formMessage = '';
+  let formCompany = '';
   let formStatus = 'idle';
-  let formError = '';
+
+  function resetForm() {
+    formName = '';
+    formEmail = '';
+    formMessage = '';
+    formCompany = '';
+    formStatus = 'idle';
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (formStatus === 'sending') return;
 
+    if (formCompany) {
+      formStatus = 'sent';
+      formName = '';
+      formEmail = '';
+      formMessage = '';
+      formCompany = '';
+      return;
+    }
+
     formStatus = 'sending';
-    formError = '';
 
     try {
       const res = await fetch(formEndpoint, {
@@ -129,7 +145,6 @@
       formMessage = '';
     } catch (err) {
       formStatus = 'error';
-      formError = err instanceof Error ? err.message : 'something went wrong';
     }
   }
 
@@ -267,53 +282,70 @@
       I take one client at a time. Fixed price, clear timeline. Optional retainer after delivery.
     </div>
 
-    <form class="contact-form" on:submit={handleSubmit} novalidate>
-      <div class="form-row">
-        <label for="cf-name">name</label>
-        <input
-          id="cf-name"
-          name="name"
-          type="text"
-          autocomplete="name"
-          bind:value={formName}
-          required
-        />
+    {#if formStatus === 'sent'}
+      <div class="contact-form contact-form-sent" role="status">
+        <div class="form-msg form-msg-ok">sent. I'll reply from mikey@arvaer.com.</div>
+        <button type="button" class="form-reset" on:click={resetForm}>send another →</button>
       </div>
+    {:else}
+      <form class="contact-form" on:submit={handleSubmit} novalidate>
+        <div class="form-row">
+          <label for="cf-name">name</label>
+          <input
+            id="cf-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            bind:value={formName}
+            required
+          />
+        </div>
 
-      <div class="form-row">
-        <label for="cf-email">email</label>
-        <input
-          id="cf-email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          bind:value={formEmail}
-          required
-        />
-      </div>
+        <div class="form-row">
+          <label for="cf-email">email</label>
+          <input
+            id="cf-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            bind:value={formEmail}
+            required
+          />
+        </div>
 
-      <div class="form-row">
-        <label for="cf-message">message</label>
-        <textarea
-          id="cf-message"
-          name="message"
-          rows="5"
-          bind:value={formMessage}
-          required
-        ></textarea>
-      </div>
+        <div class="form-row">
+          <label for="cf-message">message</label>
+          <textarea
+            id="cf-message"
+            name="message"
+            rows="5"
+            bind:value={formMessage}
+            required
+          ></textarea>
+        </div>
 
-      <div class="form-actions">
-        <button type="submit" disabled={formStatus === 'sending'}>
-          {#if formStatus === 'sending'}sending…{:else}send →{/if}
-        </button>
-        {#if formStatus === 'sent'}
-          <span class="form-msg form-msg-ok">sent. I'll get back to you.</span>
-        {:else if formStatus === 'error'}
-          <span class="form-msg form-msg-err">couldn't send — {formError}. email me directly.</span>
-        {/if}
-      </div>
-    </form>
+        <div class="form-hp" aria-hidden="true">
+          <label for="cf-company">company</label>
+          <input
+            id="cf-company"
+            name="company"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+            bind:value={formCompany}
+          />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" disabled={formStatus === 'sending'}>
+            {#if formStatus === 'sending'}sending…{:else}send →{/if}
+          </button>
+          {#if formStatus === 'error'}
+            <span class="form-msg form-msg-err">couldn't send — try again or email mikey@arvaer.com directly.</span>
+          {/if}
+        </div>
+      </form>
+    {/if}
   </section>
 
   <footer>Prominent Systems · 2026</footer>
