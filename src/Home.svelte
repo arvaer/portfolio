@@ -70,7 +70,7 @@
       name: 'Genesis',
       context: 'in progress',
       description:
-        'Event-sourced development substrate. Five-field content-addressed nodes (kind, name, refs, body, hash), five primitive verbs (create, destroy, change, revert, inspect). Mourning the death of lisp 30 years late.'
+        'my secret moonshot'
     },
     {
       name: 'byron',
