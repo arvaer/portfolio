@@ -42,16 +42,10 @@
         'HIPAA-compliant AWS migration, churn prediction model (92% ROC-AUC), AI clinical interface serving 30k+ caregivers.'
     },
     {
-      name: 'MedQuest',
-      context: 'medical practice platform',
-      description:
-        'Three production applications for a medical practice - AI conversational booking, treatment & supplement tracker, patient-facing sites. Currently architecting a migration off PatientNow, aligned with the CMS-0057-F FHIR API mandate (Jan 2027 deadline). Four-phase rollout across scheduling, billing, records, and patient engagement.'
-    },
-    {
       name: 'Cymantix',
       context: 'cloud infrastructure & domain-specific retrieval',
       description:
-        'Terraform-based production infrastructure - IAM policy structure, logging pipeline, and environment isolation that got them through SOC 2. Also built their retrieval-augmented reasoning system - custom chunking, retrieval pipeline, and reranking tuned to their product domain.'
+        'Orchestrated distributed search over web-scale unstructured data. Information retrieval theory, performance engineering, and LLM domain adaptation in collaboration with NC State.'
     },
     {
       name: 'LLM domain adaptation',
@@ -79,10 +73,10 @@
         'Event-sourced development substrate. Five-field content-addressed nodes (kind, name, refs, body, hash), five primitive verbs (create, destroy, change, revert, inspect). Mourning the death of lisp 30 years late.'
     },
     {
-      name: 'Byron',
+      name: 'byron',
       context: 'LSM-tree key-value store',
       description:
-        'Implements the Monkey and Dostoevsky optimization papers for tuning bloom filter memory allocation and compaction across LSM-tree levels. Built at Harvard.',
+        'Implements the Monkey and Dostoevsky optimization papers for tuning bloom filter memory allocation and compaction across LSM-tree levels',
       link: {
         href: 'https://github.com/arvaer/byron',
         label: 'github.com/arvaer/byron ->'
@@ -210,7 +204,7 @@
   </nav>
 
   <section>
-    <div class="section-label">Currently</div>
+    <div class="section-label">currently</div>
 
     {#each currentItems as item}
       <div class="current-block">
@@ -221,7 +215,7 @@
   </section>
 
   <section id="work">
-    <div class="section-label">Client work</div>
+    <div class="section-label">previously</div>
 
     {#each clientWork as project}
       <div class="project">
