@@ -75,7 +75,7 @@
 </script>
 
 <svelte:head>
-  <title>Byron — a walkthrough · Prominent Systems</title>
+  <title>Byron — a walkthrough · arvaer</title>
   <meta
     name="description"
     content="A walkthrough of Byron, an LSM-tree key-value store: design decisions, results, and what I'd change."

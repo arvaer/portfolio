@@ -179,7 +179,7 @@ def neighbor_list_cuda_warp(positions, cutoff, ghost_positions,
 </script>
 
 <svelte:head>
-  <title>ghostly-runs — a walkthrough · Prominent Systems</title>
+  <title>ghostly-runs — a walkthrough · arvaer</title>
   <meta
     name="description"
     content="A walkthrough of ghostly-runs: optimizing and benchmarking neighbor-list construction across serial AVX-512, OpenMP, MPI, CUDA, and productivity-language backends on the Harvard HUIT cluster."

@@ -1,14 +1,14 @@
 <script>
-  const dragoniteCandidates = Object.entries(
+  const bobbieCandidates = Object.entries(
     import.meta.glob('../*.{png,jpg,jpeg,webp,avif,svg}', {
       eager: true,
       import: 'default'
     })
   )
-    .filter(([path]) => path.toLowerCase().includes('dragonite'))
+    .filter(([path]) => path.toLowerCase().includes('bobbie'))
     .sort(([a], [b]) => a.localeCompare(b));
 
-  const dragoniteImage = dragoniteCandidates[0]?.[1] ?? null;
+  const bobbieImage = bobbieCandidates[0]?.[1] ?? null;
 
   const navItems = [
     { href: '#work', label: 'work' },
@@ -84,7 +84,7 @@
     },
   ];
 
-  const formEndpoint = 'https://api.gopigeon.dev/f/f_mm0k4yisfzkqvz5z';
+  const formEndpoint = 'https://api.gopigeon.dev/f/f_6hctsfc40xmk35sp';
 
   let formName = '';
   let formEmail = '';
@@ -172,10 +172,10 @@
 </script>
 
 <svelte:head>
-  <title>Prominent Systems</title>
+  <title>Mikey Almeida · arvaer</title>
   <meta
     name="description"
-    content="Prominent Systems - software, infrastructure, and research work by Mikey."
+    content="Software, infrastructure, and research work by Mikey Almeida (arvaer)."
   />
 </svelte:head>
 
@@ -183,14 +183,14 @@
   <header>
     <div class="hero-shell">
       <div class="hero-copy">
-        <div class="header-name">Mikey</div>
-        <div class="header-sub">Prominent Systems</div>
+        <div class="header-name">Mikey Almeida</div>
+        <div class="header-sub">@arvaer</div>
       </div>
 
-      {#if dragoniteImage}
-        <figure class="hero-dragonite" aria-label="Dragonite accent image">
-          <div class="hero-dragonite-frame">
-            <img src={dragoniteImage} alt="Dragonite" />
+      {#if bobbieImage}
+        <figure class="hero-bobbie" aria-label="Bobbie the cat">
+          <div class="hero-bobbie-frame">
+            <img src={bobbieImage} alt="Bobbie, my cat" />
           </div>
         </figure>
       {/if}
@@ -342,5 +342,5 @@
     {/if}
   </section>
 
-  <footer>Prominent Systems · 2026</footer>
+  <footer>Mikey Almeida · @arvaer · 2026</footer>
 </div>

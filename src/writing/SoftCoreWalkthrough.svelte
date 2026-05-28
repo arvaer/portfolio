@@ -376,7 +376,7 @@ end;`,
 </script>
 
 <svelte:head>
-  <title>RV32IM soft-core — a walkthrough · Prominent Systems</title>
+  <title>RV32IM soft-core — a walkthrough · arvaer</title>
   <meta
     name="description"
     content="A 32-bit RISC-V soft-core CPU in VHDL, plus a hand-written assembler and emulator — gates to compiler, end to end."

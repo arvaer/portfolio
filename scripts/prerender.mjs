@@ -78,7 +78,7 @@ async function main() {
     const { head, body } = render(Component);
 
     const titleMatch = head.match(/<title>([\s\S]*?)<\/title>/i);
-    const title = titleMatch ? titleMatch[1] : 'Prominent Systems';
+    const title = titleMatch ? titleMatch[1] : 'Mikey Almeida · arvaer';
     const headWithoutTitle = head.replace(/<title>[\s\S]*?<\/title>/i, '').trim();
 
     const canonicalUrl = route.url.endsWith('/') ? route.url : `${route.url}/`;
