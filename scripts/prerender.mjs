@@ -24,6 +24,12 @@ const routes = [
     outFile: 'writing/ghostly/index.html'
   },
   {
+    url: '/writing/jco-scenario-dsl',
+    componentPath: 'src/writing/JcoScenarioWalkthrough.svelte',
+    exportName: 'JcoScenario',
+    outFile: 'writing/jco-scenario-dsl/index.html'
+  },
+  {
     url: '/writing/softcore',
     componentPath: 'src/writing/SoftCoreWalkthrough.svelte',
     exportName: 'SoftCore',

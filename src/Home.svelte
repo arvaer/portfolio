@@ -30,6 +30,12 @@
 
   const clientWork = [
     {
+      name: 'JCO scenario DSL',
+      context: 'compiler architecture & astrodynamics runtime',
+      description:
+        'Built a Lisp/JSON scenario language for simulated space operations: compiler lowering into a typed graph, frame/type validation passes, deterministic graph dumps, and a NumPy kernel backend. Composed truth propagation, breakup, RPO, launch/insertion, direct-ascent intercept, transfer ranking, sensor observations, phenomenology, tracklets, alerts, catalog queries, and scene/GeoJSON outputs into end-to-end JCO vignettes.'
+    },
+    {
       name: 'gopigeon.dev',
       context: 'solo dev',
       description:
@@ -143,6 +149,11 @@
   }
 
   const writing = [
+    {
+      title: 'JCO scenario DSL — compiler-to-graph space simulation runtime',
+      status: 'draft',
+      href: '/writing/jco-scenario-dsl/'
+    },
     {
       title: 'ghostly-runs — neighbor-list construction across five parallelization regimes',
       status: 'walkthrough',

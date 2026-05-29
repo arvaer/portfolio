@@ -2,6 +2,7 @@
   import Home from './Home.svelte';
   import ByronWalkthrough from './writing/ByronWalkthrough.svelte';
   import GhostlyRunsWalkthrough from './writing/GhostlyRunsWalkthrough.svelte';
+  import JcoScenarioWalkthrough from './writing/JcoScenarioWalkthrough.svelte';
   import SoftCoreWalkthrough from './writing/SoftCoreWalkthrough.svelte';
 
   function currentRoute() {
@@ -9,6 +10,7 @@
     const path = window.location.pathname.replace(/\/+$/, '') || '/';
     if (path.startsWith('/writing/byron')) return '/writing/byron';
     if (path.startsWith('/writing/ghostly')) return '/writing/ghostly';
+    if (path.startsWith('/writing/jco-scenario-dsl')) return '/writing/jco-scenario-dsl';
     if (path.startsWith('/writing/softcore')) return '/writing/softcore';
     return '/';
   }
@@ -53,6 +55,8 @@
   <ByronWalkthrough />
 {:else if route === '/writing/ghostly'}
   <GhostlyRunsWalkthrough />
+{:else if route === '/writing/jco-scenario-dsl'}
+  <JcoScenarioWalkthrough />
 {:else if route === '/writing/softcore'}
   <SoftCoreWalkthrough />
 {:else}
