@@ -19,49 +19,48 @@
 
   const currentItems = [
     {
-      tag: 'contractor at IPS (Intel Payload Systems)',
-      text: 'Synthetic drone data generation in Unreal Engine. Making Diffusion-based forward modeling across ControlNet, Stable Diffusion, and FramePack very fast and realistic!'
+      tag: 'contractor',
+      text: 'World modeling through synthetic data generation; ingesting and federating search over 60GB+ of live data on satellites, aircraft, ships, terrain, cars, foliage, weather... into versioned small worlds. Gang scheduling is my new favorite word! Designed a Lisp that compiles into an operation graph so each kernel can be optimized.'
     },
     {
       tag: 'research',
-      text: 'FPGA+GPU acceleration for LLM inference - heterogeneous compute for latency-critical workloads. Portable neighbor list kernels for molecular dynamics. '
-    }
+      text: 'FPGA+GPU acceleration for LLM inference. Porting code from CUDA to ROCm and optimizing HIP. Bounded, demand-driven computation and lots of Marvin Minsky.'
+    },
+    {
+      tag: 'gopigeon.dev',
+      text:
+      'A foray into what it\'s like to run Common Lisp in prod. Built with an event-driven architecture on top of Postgres and deployed across GKE as well as a few local edge nodes; uses OpenFaaS, Kueue, and lots and lots of Nix.'
+    },
   ];
 
   const clientWork = [
     {
-      name: 'gopigeon.dev',
-      context: 'solo dev',
-      description:
-      'A microSaaS to enable LLMs with durable queues and fan-out form filling. Common Lisp backend, Svelte Front end, self managed kubernetes cluster on my own physical hardware.'
-    },
-    {
       name: 'Healthtech platform',
       context: 'contractor · staff eng',
       description:
-        'HIPAA-compliant AWS migration, churn prediction model (92% ROC-AUC), AI clinical interface serving 30k+ caregivers.'
+      'Completed a full HIPAA-compliant AWS migration. Built, backtested, and deployed a churn prediction model (92% ROC-AUC) to 30k+ users.'
     },
     {
       name: 'Cymantix',
       context: 'cloud infrastructure & domain-specific retrieval',
       description:
-        'Orchestrated distributed search over web-scale unstructured data. Information retrieval theory, performance engineering, and LLM domain adaptation in collaboration with NC State.'
+        'Federated distributed search over web-scale unstructured data. LLM/Transformer-based domain adaptation in collaboration with NC State and UNC before it was cool.'
     },
     {
       name: 'LLM domain adaptation',
       context: 'NSA-funded research',
       description:
-        'Self-denoising autoencoder approach to adapting language models to specialized domains without catastrophic forgetting.'
+        'Self-denoising autoencoder approach to adapting language models to specialized domains without catastrophic forgetting. Beat the PandaJAM challenge!'
     },
     {
       name: 'FPGA soft-core CPU',
       description:
-        'Soft-core CPU on FPGA from scratch with a custom ISA. Full assembler and compiler toolchain. Eventually got DOOM running on it.'
+        'Built a soft-core CPU on FPGA in Verilog with a custom ISA. Full assembler and compiler toolchain. Eventually got DOOM running on it.'
     },
     {
       name: 'Coreboot ThinkPad firmware',
       description:
-        'Opened the machines, wrote custom RP2040 firmware for the SPI reader, reverse-engineered portions of the proprietary blob with public docs, got a clean Coreboot payload running.'
+        'Wrote custom RP2040 firmware for the SPI reader, reverse-engineered portions of the proprietary blob with public docs, got a clean Coreboot payload running before Claude made it trivial.'
     },
   ];
 
