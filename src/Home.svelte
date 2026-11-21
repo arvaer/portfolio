@@ -20,7 +20,7 @@
   const currentItems = [
     {
       tag: 'contractor',
-      text: 'World modeling through synthetic data generation; ingesting and federating search over 60GB+ of live data on satellites, aircraft, ships, terrain, cars, foliage, weather... into versioned small worlds. Gang scheduling is my new favorite word! Designed a Lisp that compiles into an operation graph so each kernel can be optimized.'
+      text: 'World modeling through synthetic data generation; ingesting and federating search over 60GB+ of live data on satellites, aircraft, ships, terrain, cars, foliage, weather... into versioned small worlds. Also got to deesign a Lisp that compiles into an operation graph so each kernel can be optimized.'
     },
     {
       tag: 'research',
@@ -272,7 +272,7 @@
     <div class="contact-line"><a href="https://github.com/arvaer">github.com/arvaer</a></div>
 
     <div class="contact-note">
-      Please feel free to send me an email if you would like to connect over some topic! 
+      Please feel free to send me an email if you would like to connect over some topic!
     </div>
 
     {#if formStatus === 'sent'}
